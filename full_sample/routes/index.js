@@ -13,7 +13,7 @@
 // limitations under the License.
 
 const {GoogleAuth} = require('google-auth-library');
-const businessmessages = require("businessmessages");
+const businessmessages = require('businessmessages');
 const express = require('express');
 const router = express.Router();
 const uuidv4 = require('uuid/v4');
@@ -34,11 +34,11 @@ const SAMPLE_IMAGES = [
 
 // Initialize the Business Messages API
 const bmApi =
-    new businessmessages.businessmessages_v1.Businessmessages({});
+  new businessmessages.businessmessages_v1.Businessmessages({});
 
 // Set the scope for API authentication
 const auth = new GoogleAuth({
-  scopes: 'https://www.googleapis.com/auth/businessmessages'
+  scopes: 'https://www.googleapis.com/auth/businessmessages',
 });
 
 let authClient = false;
@@ -246,7 +246,7 @@ function sendResponse(messageObject, conversationId) {
     parent: 'conversations/' + conversationId,
     resource: {
       eventType: 'TYPING_STARTED',
-      representative: getRepresentative()
+      representative: getRepresentative(),
     },
     eventId: uuidv4(),
   };
@@ -288,7 +288,7 @@ function getRepresentative() {
   return {
     representativeType: 'BOT',
     displayName: 'Echo Bot',
-    avatarImage: 'https://storage.googleapis.com/sample-avatars-for-bm/bot-avatar.jpg'
+    avatarImage: 'https://storage.googleapis.com/sample-avatars-for-bm/bot-avatar.jpg',
   };
 }
 
