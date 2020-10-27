@@ -8,6 +8,7 @@ to support a Business Messages conversational experience.
 * step2_rich_features - Extension of the base code that contains TODOs
   for adding support for chips, cards, and carousels
 * full_sample - Complete solution for adding rich features
+* message_validation_sample - Demonstrates how to validate messages com from Google
 
 To learn more about setting up Business Messages and supporting
 chat from Search and Maps, see
