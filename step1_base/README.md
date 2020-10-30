@@ -1,58 +1,52 @@
-# BUSINESS MESSAGES: ECHO BOT
+# BUSINESS MESSAGES: Echo Bot
 
-This sample demonstrates how to receive a message from the Business Messages
-platform and echo the same message back to the user using the Business Messages
-Node.js SDK.
+This sample demonstrates how to receive a message from the [Business Messages](https://developers.google.com/business-communications/business-messages/reference/rest)
+platform and echo the same message back to the user using the
+[Business Messages Node.js client library](https://github.com/google-business-communications/nodejs-businessmessages).
 
 This sample runs on the Google App Engine.
 
 See the Google App Engine (https://cloud.google.com/appengine/docs/nodejs/) standard environment
 documentation for more detailed instructions.
 
-## PREREQUISITES
+## Documentation
 
-You must have the following software installed on your development machine:
+The documentation for the Business Messages API can be found [here](https://developers.google.com/business-communications/business-messages/reference/rest).
+
+## Prerequisite
+
+You must have the following software installed on your machine:
 
 * [Google Cloud SDK](https://cloud.google.com/sdk/) (aka gcloud)
 * [Node.js](https://nodejs.org/en/) - version 10 or above
 
-## SETUP
+## Before you begin
 
-Register with Business Messages:
+1.  [Register with Business Messages](https://developers.google.com/business-communications/business-messages/guides/set-up/register).
+1.  Once registered, follow the instructions to [enable the APIs for your project](https://developers.google.com/business-communications/business-messages/guides/set-up/register#enable-api).
+1. Open the [Create an agent](https://developers.google.com/business-communications/business-messages/guides/set-up/agent)
+guide and follow the instructions to create a Business Messages agent.
 
-    1.  Open [Google Cloud Console](https://console.cloud.google.com) with your
-        Business Messages Google account and create a new project for your agent.
+## Deploy the sample
 
-        Note the **Project ID** and **Project number** values.
+1.  In a terminal, navigate to this sample's root directory.
 
-    2.  Open the
-        [Business Messages API](https://console.developers.google.com/apis/library/businessmessages.googleapis.com)
-        in the API Library.
+1.  Run the following commands:
 
-    3.  Click **Enable**.
+    ```bash
+    gcloud config set project PROJECT_ID
+    ```
 
-    4.  [Register your project](https://developers.google.com/business-communications/business-messages/guides/set-up/register)
-        with Business Messages.
+    Where PROJECT_ID is the project ID for the project you created when you registered for
+    Business Messages.
 
-Create a Business Messages agent:
+    ```base
+    gcloud app deploy
+    ```
 
-    *   Open the [Create an agent](https://developers.google.com/business-communications/business-messages/guides/set-up/agent)
-        guide and follow the instructions to create a Business Messages agent.
+1.  On your mobile device, use the test business URL associated with the
+    Business Messages agent you created. Open a conversation with your agent
+    and type in "Hello". Once delivered, you should receive "Hello" back
+    from the agent.
 
-## RUN THE SAMPLE
-
-    1.  In a terminal, navigate to this sample's root directory.
-
-    2.  Run the following commands:
-
-        gcloud config set project PROJECT_ID
-
-        Where PROJECT_ID is the project ID for the project you created when you registered for
-        Business Messages
-
-        gcloud app deploy
-
-    3.  On your mobile device, use the test business URL associated with the
-        Business Messages agent you created. Open a conversation with your agent
-        and type in "Hello". Once delivered, you should receive "Hello" back
-        from the agent.
+    See the [Test an agent](https://developers.google.com/business-communications/business-messages/guides/set-up/agent#test-agent) guide if you need help retrieving your test business URL.

@@ -58,7 +58,7 @@ router.post('/callback', function(req, res, next) {
   let conversationId = requestBody.conversationId;
 
   // Calculate the signature to validate the message is from Google
-  let partnerKey = "YOUR_PARTNER_KEY";
+  let partnerKey = 'YOUR_PARTNER_KEY';
   let generatedSignature = require('crypto').createHmac('sha512', partnerKey).update(Buffer.from(req.rawBody, 'utf8')).digest('base64');
 
   // Grab the x-goog-signature from the request header
