@@ -42,8 +42,6 @@ const auth = new GoogleAuth({
   scopes: 'https://www.googleapis.com/auth/businessmessages',
 });
 
-let authClient = false;
-
 /**
  * The webhook callback method.
  */
@@ -53,6 +51,11 @@ router.post('/callback', function(req, res, next) {
   // Log the full JSON payload received
   console.log('requestBody: ' + JSON.stringify(requestBody));
   console.log('requestHeader: ' + JSON.stringify(req.headers));
+
+  // To set a webhook, extract the secret from the request and return it
+  if (requestBody.secret && requestBody.clientToken){
+    return res.status(200).send(requestBody.secret );
+  }
 
   // Extract the message payload parameters
   let conversationId = requestBody.conversationId;
@@ -84,7 +87,7 @@ router.post('/callback', function(req, res, next) {
 
     routeMessage(message, conversationId);
   } else if (requestBody.suggestionResponse !== undefined) {
-    let message = requestBody.suggestionResponse.text;
+    let message = requestBody.suggestionResponse.postbackData;
 
     // Log message parameters
     console.log('conversationId: ' + conversationId);
@@ -265,10 +268,8 @@ function echoMessage(message, conversationId) {
  * @param {object} messageObject The message object payload to send to the user.
  * @param {string} conversationId The unique id for this user and agent.
  */
-function sendResponse(messageObject, conversationId) {
-  if (!authClient) {
-    initCredentials();
-  }
+async function sendResponse(messageObject, conversationId) {
+  let authClient = await auth.getClient();
 
   // Create the payload for sending a typing started event
   let apiEventParams = {
@@ -320,18 +321,6 @@ function getRepresentative() {
     displayName: 'Echo Bot',
     avatarImage: 'https://storage.googleapis.com/sample-avatars-for-bm/bot-avatar.jpg',
   };
-}
-
-/**
- * Initializes the Google credentials for calling the
- * Business Messages API.
- */
-async function initCredentials() {
-  authClient = await auth.getClient();
-
-  // Initialize auth token
-  authClient.refreshAccessToken();
-  await authClient.getAccessToken();
 }
 
 /**
